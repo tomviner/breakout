@@ -18,14 +18,22 @@ BLOCK_W = W / N_BLOCKS
 BLOCK_H = BLOCK_W / 4
 BLOCK_COLOURS = RED, GREEN, BLUE
 
+
+class Block(Rect):
+
+    def __init__(self, colour, rect):
+        Rect.__init__(self, rect)
+        self.colour = colour
+
 blocks = []
 for n_block in range(N_BLOCKS):
-    block = Rect((n_block * BLOCK_W, 0), (BLOCK_W, BLOCK_H))
-    blocks.append((block, BLOCK_COLOURS[n_block % len(BLOCK_COLOURS)]))
+    colour = BLOCK_COLOURS[n_block % len(BLOCK_COLOURS)]
+    block = Block(colour, ((n_block * BLOCK_W, 0), (BLOCK_W, BLOCK_H)))
+    blocks.append(block)
 
 def draw_blocks():
-    for block, colour in blocks:
-        screen.draw.filled_rect(block, colour)
+    for block in blocks:
+        screen.draw.filled_rect(block, block.colour)
 
 def draw():
     screen.clear()
