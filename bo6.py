@@ -16,11 +16,12 @@ bat = Rect((W/2, 0.96 * H), (150, 15))
 N_BLOCKS = 8
 BLOCK_W = W / N_BLOCKS
 BLOCK_H = BLOCK_W / 4
+BLOCK_COLOURS = RED, GREEN, BLUE
 
 blocks = []
 for n_block in range(N_BLOCKS):
     block = Rect((n_block * BLOCK_W, 0), (BLOCK_W, BLOCK_H))
-    blocks.append((block, random.choice([RED, GREEN, BLUE])))
+    blocks.append((block, BLOCK_COLOURS[n_block % len(BLOCK_COLOURS)]))
 
 def draw_blocks():
     for block, colour in blocks:
