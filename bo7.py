@@ -13,7 +13,7 @@ ball = Rect((W/2, H/2), (30, 30))
 Direction = namedtuple('Direction', 'x y')
 ball_dir = Direction(5, -5)
 
-bat = Rect((W/2, 0.96 * H), (150, 15))
+bat = Rect((W/2, 0.96 * H), (1500, 15))
 N_BLOCKS = 8
 BLOCK_W = W / N_BLOCKS
 BLOCK_H = BLOCK_W / 4
@@ -49,6 +49,11 @@ def on_mouse_move(pos):
     x, y = pos
     bat.center = (x, bat.center[1])
 
+def on_mouse_down():
+    global ball_dir
+    ball_dir = Direction(ball_dir.x * 1.5, ball_dir.y * 1.5)
+
+
 def move(ball):
     """returns a new ball at a new position
     """
@@ -72,7 +77,11 @@ def move(ball):
         ball_dir = Direction(ball_dir.x, abs(ball_dir.y))
         blocks.pop(to_kill)
 
-
+    if not blocks:
+        sounds.win.play()
+        sounds.win.play()
+        time.sleep(1)
+        sys.exit()
 
     if ball.y > H:
         sounds.die.play()
