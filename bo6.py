@@ -63,6 +63,12 @@ def move(ball):
     if ball.colliderect(bat):
         ball_dir = Direction(ball_dir.x, - abs(ball_dir.y))
 
+    to_kill = ball.collidelist(blocks)
+    ball_dir = Direction(ball_dir.x, abs(ball_dir.y))
+    if to_kill:
+        blocks.pop(to_kill)
+
+
 
     if ball.y > H:
         sys.exit()
