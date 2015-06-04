@@ -1,4 +1,5 @@
 from collections import namedtuple
+import sys
 
 
 W = 800
@@ -8,7 +9,7 @@ BLUE = 0, 0, 200
 
 ball = Rect((W/2, H/2), (30, 30))
 Direction = namedtuple('Direction', 'x y')
-ball_dir = Direction(5, 5)
+ball_dir = Direction(5, -5)
 
 bat = Rect((W/2, 0.96 * H), (150, 15))
 
@@ -18,7 +19,6 @@ def draw():
     screen.draw.filled_rect(bat, RED)
 
 def on_key_down():
-    import sys
     sys.exit()
 
 def on_mouse_move(pos):
@@ -31,12 +31,18 @@ def move(ball):
     global ball_dir
     ball.move_ip(ball_dir)
 
-def boubce():
     if ball.x > W or ball.x <= 0:
         ball_dir = Direction(-1 * ball_dir.x, ball_dir.y)
 
-    if ball.y > H or ball.y <= 0:
+    if ball.y <= 0:
         ball_dir = Direction(ball_dir.x, ball_dir.y * -1)
+
+    if ball.colliderect(bat):
+        ball_dir = Direction(ball_dir.x, - abs(ball_dir.y))
+
+
+    if ball.y > H:
+        sys.exit()
 
 
 
