@@ -25,7 +25,6 @@ for n_block in range(N_BLOCKS):
 
 def draw_blocks():
     for block, colour in blocks:
-        print(block)
         screen.draw.filled_rect(block, colour)
 
 def draw():
@@ -54,6 +53,7 @@ def move(ball):
         ball_dir = Direction(ball_dir.x, ball_dir.y * -1)
 
     if ball.colliderect(bat):
+        sounds.blip.play()
         ball_dir = Direction(ball_dir.x, - abs(ball_dir.y))
 
     to_kill = ball.collidelist(blocks)
