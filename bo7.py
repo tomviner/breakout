@@ -13,7 +13,7 @@ ball = Rect((W/2, H/2), (30, 30))
 Direction = namedtuple('Direction', 'x y')
 ball_dir = Direction(5, -5)
 
-bat = Rect((W/2, 0.96 * H), (1500, 15))
+bat = Rect((W/2, 0.96 * H), (150, 15))
 N_BLOCKS = 8
 BLOCK_W = W / N_BLOCKS
 BLOCK_H = BLOCK_W / 4
